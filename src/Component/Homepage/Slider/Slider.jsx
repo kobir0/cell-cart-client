@@ -36,13 +36,13 @@ const Slider = () => {
         </div>
       </div>
       <div className="flex justify-center w-full py-2 gap-2">
-        <a href="#item1" className="btn btn-xs">
+        <a href="#item1" className="btn btn-xs  btn-outline">
           1
         </a>
-        <a href="#item2" className="btn btn-xs">
+        <a href="#item2" className="btn btn-xs btn-outline ">
           2
         </a>
-        <a href="#item3" className="btn btn-xs">
+        <a href="#item3" className="btn btn-xs  btn-outline">
           3
         </a>
       </div>
