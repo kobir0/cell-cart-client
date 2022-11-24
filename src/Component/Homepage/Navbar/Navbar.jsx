@@ -31,16 +31,15 @@ const Navbar = () => {
                 <NavLink to="/home">Home</NavLink>
               </li>
               <li>
-                <a>Portfolio</a>
-              </li>
-              <li>
-                <a>About</a>
+                <NavLink to="/dashboard">Dash Board</NavLink>
               </li>
             </ul>
           </div>
         </div>
         <div className="navbar-center">
-          <a className="btn btn-ghost normal-case text-xl">Cell Cart</a>
+          <NavLink to="/" className="btn btn-ghost normal-case text-xl">
+            Cell Cart
+          </NavLink>
         </div>
         <div className="navbar-end">
           <button className="btn btn-ghost btn-circle">
