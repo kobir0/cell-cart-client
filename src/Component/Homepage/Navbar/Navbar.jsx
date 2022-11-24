@@ -6,6 +6,14 @@ import { AuthContext } from "../../SharedCompo/Context/UserContext";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
+  const brand = {
+    brandName: "Apple",
+    brandId: "1",
+    brandImg: "https://i.ibb.co/b64Gtmw/pngegg-1.png",
+  };
+  const json = JSON.stringify(brand);
+  console.log(json);
+
   const handleLogout = () => {
     logOut()
       .then(() => {
@@ -60,22 +68,41 @@ const Navbar = () => {
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
-                <img src={user?.photoURL} alt="" />
+                {user?.photoURL ? (
+                  <img src={user?.photoURL} alt="" />
+                ) : (
+                  <img
+                    src="https://t3.ftcdn.net/jpg/05/14/18/46/360_F_514184651_W5rVCabKKRH6H3mVb62jYWfuXio8c8si.jpg"
+                    alt=""
+                  />
+                )}
               </div>
             </label>
             <ul
               tabIndex={0}
               className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
             >
-              <li></li>
-              <li>
-                <span className="uppercase text-lg font-semibold">
-                  {user?.displayName}
-                </span>
-              </li>
-              <li>
-                <button onClick={handleLogout}>Logout</button>
-              </li>
+              {user?.email ? (
+                <>
+                  {" "}
+                  <li>
+                    <span className="uppercase text-lg font-semibold">
+                      {user?.displayName}
+                    </span>
+                  </li>
+                  <li>
+                    <button onClick={handleLogout}>Logout</button>
+                  </li>
+                </>
+              ) : (
+                <li>
+                  <button className="">
+                    <NavLink to="/login" className="w-full">
+                      log in
+                    </NavLink>
+                  </button>
+                </li>
+              )}
             </ul>
           </div>
         </div>

@@ -28,7 +28,7 @@ const Login = () => {
         setLoading(false);
         form.reset();
         navigate(from, { replace: true });
-        toast("You have Logged In SuccessFully !!");
+        toast.success("Logged In SuccessFully !!");
       })
       .catch((error) => {
         setError(error.message);
@@ -43,7 +43,7 @@ const Login = () => {
   const handleGooglePopUp = () => {
     signInWithPopGoogle()
       .then((res) => {
-        toast("You have Logged In SuccessFully !!");
+        toast.success("You have Logged In SuccessFully !!");
         navigate(from, { replace: true });
       })
       .catch((error) => {
