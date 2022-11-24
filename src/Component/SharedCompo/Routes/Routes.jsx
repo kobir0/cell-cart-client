@@ -6,6 +6,7 @@ import Home from "../../Homepage/Home/Home";
 import Errorpage from "../ErrorPage/ErrorPage";
 import Main from "./Main";
 import MyProduct from "../../DashBoard/Seller/MyProduct";
+import Register from "../../Authentication/Register";
 
 const Routes = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const Routes = createBrowserRouter([
       {
         path: "/home",
         element: <Home></Home>,
+      },
+      {
+        path: "/register",
+        element: <Register></Register>,
       },
       {
         path: "/dashboard",
