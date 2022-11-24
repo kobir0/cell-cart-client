@@ -7,6 +7,7 @@ import Errorpage from "../ErrorPage/ErrorPage";
 import Main from "./Main";
 import MyProduct from "../../DashBoard/Seller/MyProduct";
 import Register from "../../Authentication/Register";
+import Login from "../../Authentication/Login";
 
 const Routes = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const Routes = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
       },
       {
         path: "/dashboard",

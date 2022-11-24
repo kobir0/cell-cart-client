@@ -1,13 +1,13 @@
 import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { AuthContext } from "../SharedCompo/Context/UserContext";
 
 const Register = () => {
   const [Error, setError] = useState("");
   const { createUser, updateProfileInfo } = useContext(AuthContext);
   //   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
+  //   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
