@@ -46,7 +46,7 @@ const AddProduct = () => {
       email: user?.email,
       userImg: user?.photoURL,
       userName: user?.displayName,
-      status: "available",
+      status: "Available",
       userVerified: false,
     };
 
@@ -62,7 +62,6 @@ const AddProduct = () => {
         if (data.status) {
           toast.success(data.message);
         }
-        toast(data.message);
       })
       .catch((err) => {
         console.log(err);
