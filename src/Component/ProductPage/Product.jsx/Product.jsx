@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useParams } from "react-router-dom";
+import Loading from "../../SharedCompo/Loading/Loading";
 
 const Product = () => {
   let { id } = useParams();
@@ -13,7 +14,10 @@ const Product = () => {
       return data.products;
     },
   });
-  console.log(products, id);
+  console.log(products);
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div className="min-h-screen">

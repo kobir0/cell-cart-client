@@ -25,6 +25,11 @@ const AddProduct = () => {
     const contactNumber = target.contactNumber.value;
     const location = target.location.value;
 
+    if (brand === "Select" || condition === "Select") {
+      toast.error("Please Select All Requirements");
+      return;
+    }
+
     const product = {
       brandId,
       brandName,
@@ -44,24 +49,25 @@ const AddProduct = () => {
       status: "unsold",
       userVerified: false,
     };
+    console.log(product);
 
-    fetch("http://localhost:5000/products", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(product),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.status) {
-          toast.success(data.message);
-        }
-        toast(data.message);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    //   fetch("http://localhost:5000/products", {
+    //     method: "POST",
+    //     headers: {
+    //       "content-type": "application/json",
+    //     },
+    //     body: JSON.stringify(product),
+    //   })
+    //     .then((res) => res.json())
+    //     .then((data) => {
+    //       if (data.status) {
+    //         toast.success(data.message);
+    //       }
+    //       toast(data.message);
+    //     })
+    //     .catch((err) => {
+    //       console.log(err);
+    //     });
   };
   return (
     <div className="flex justify-center m-3 rounded-lg bg-slate-300 p-4">
@@ -70,14 +76,14 @@ const AddProduct = () => {
           <h1 className="text-center my-2 text-lg">Product Information</h1>
           <select
             name="brand"
-            defaultValue="Selct Your Brand"
+            defaultValue="Select Your Brand"
             className="select select-bordered w-full my-2"
             required
           >
-            <option value="Selct Your Brand" disabled>
-              Selct Your Brand Name
+            <option value="Select" selected disabled>
+              Select Your Brand Name
             </option>
-            <option value={"01 Apple"}>Apple</option>
+            <option value={"01 I-Phone"}>I Phone</option>
             <option value={"02 OnePlus"}>OnePlus</option>
             <option value={"03 Samsung"}>Samsung</option>
           </select>
@@ -113,12 +119,12 @@ const AddProduct = () => {
           </div>
           <select
             name="condition"
-            defaultValue="Selct Your Brand"
+            defaultValue="Select Your Brand"
             className="select select-bordered w-full my-2"
             required
           >
-            <option value="Selct Your Brand" disabled>
-              Selct product condition
+            <option value="Select" selected disabled>
+              Select product condition
             </option>
             <option value={"Best"}>Best</option>
             <option value={"Better"}>Better</option>
