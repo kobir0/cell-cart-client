@@ -34,7 +34,7 @@ const Routes = createBrowserRouter([
       },
       {
         path: "/brands/:id",
-        element: <Product></Product>,
+        element: <Product ></Product>,
       },
       {
         path: "/dashboard",

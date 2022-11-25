@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../SharedCompo/Loading/Loading";
+import ProductCard from "./ProductCard";
 
 const Product = () => {
   let { id } = useParams();
@@ -14,14 +15,16 @@ const Product = () => {
       return data.products;
     },
   });
-  console.log(products);
+
   if (isLoading) {
     return <Loading></Loading>;
   }
 
   return (
-    <div className="min-h-screen">
-      <h1>{products?.length}</h1>
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
+      {products?.map((product) => (
+        <ProductCard key={product._id} product={product}></ProductCard>
+      ))}
     </div>
   );
 };

@@ -26,7 +26,7 @@ const AddProduct = () => {
     const location = target.location.value;
 
     if (brand === "Select" || condition === "Select") {
-      toast.error("Please Select All Requirements");
+      toast.error("Please Select All Requirements correctly");
       return;
     }
 
@@ -46,28 +46,27 @@ const AddProduct = () => {
       email: user?.email,
       userImg: user?.photoURL,
       userName: user?.displayName,
-      status: "unsold",
+      status: "available",
       userVerified: false,
     };
-    console.log(product);
 
-    //   fetch("http://localhost:5000/products", {
-    //     method: "POST",
-    //     headers: {
-    //       "content-type": "application/json",
-    //     },
-    //     body: JSON.stringify(product),
-    //   })
-    //     .then((res) => res.json())
-    //     .then((data) => {
-    //       if (data.status) {
-    //         toast.success(data.message);
-    //       }
-    //       toast(data.message);
-    //     })
-    //     .catch((err) => {
-    //       console.log(err);
-    //     });
+    fetch("http://localhost:5000/products", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(product),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status) {
+          toast.success(data.message);
+        }
+        toast(data.message);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <div className="flex justify-center m-3 rounded-lg bg-slate-300 p-4">
