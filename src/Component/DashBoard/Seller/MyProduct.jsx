@@ -1,12 +1,18 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
+import toast from "react-hot-toast";
 import { AuthContext } from "../../SharedCompo/Context/UserContext";
+import Loading from "../../SharedCompo/Loading/Loading";
 
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
 
   const url = `http://localhost:5000/products?email=${user?.email}`;
-  const { data: products = [], isLoading } = useQuery({
+  const {
+    data: products = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["brands", user?.email],
     queryFn: async () => {
       const res = await fetch(url);
@@ -14,6 +20,34 @@ const MyProduct = () => {
       return data.products;
     },
   });
+
+  const handleDelete = (id, product) => {
+    const confirm = window.confirm(
+      `Are you sure you want to delete ${product.brandName} ${product.model} ? `
+    );
+
+    if (confirm) {
+      fetch(`http://localhost:5000/products/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status) {
+            toast.success(data.message);
+          } else {
+            toast.error(data.message);
+          }
+          refetch();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      return;
+    }
+  };
+
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   return (
     <div>
@@ -30,7 +64,7 @@ const MyProduct = () => {
           </thead>
           <tbody>
             {products.map((product, i) => (
-              <tr>
+              <tr key={i}>
                 <td>
                   {i + 1}: {product.brandName} {product.model}
                 </td>
@@ -41,7 +75,10 @@ const MyProduct = () => {
                   <button className="btn btn-xs btn-outline">Advertise</button>
                 </td>
                 <td>
-                  <button className="btn btn-xs btn-error btn-outline">
+                  <button
+                    onClick={() => handleDelete(product._id, product)}
+                    className="btn btn-xs btn-error btn-outline"
+                  >
                     Delete
                   </button>
                 </td>
