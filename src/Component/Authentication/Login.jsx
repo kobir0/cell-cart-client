@@ -5,10 +5,11 @@ import { AuthContext } from "../SharedCompo/Context/UserContext";
 
 const Login = () => {
   const [Error, setError] = useState("");
-
+  const [userEmail, setUserEmail] = useState("");
   const { logIn, signInWithPopGoogle } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
+  console.log(userEmail);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -26,8 +27,7 @@ const Login = () => {
     logIn(email, password)
       .then((result) => {
         setLoading(false);
-        form.reset();
-        navigate(from, { replace: true });
+
         toast.success("Logged In SuccessFully !!");
       })
       .catch((error) => {
@@ -44,13 +44,37 @@ const Login = () => {
     signInWithPopGoogle()
       .then((res) => {
         toast.success("You have Logged In SuccessFully !!");
-        navigate(from, { replace: true });
+
+        if (res.user.email) {
+          userToDb(res.user.displayName, res.user.email, "Buyer");
+        }
       })
       .catch((error) => {
         console.error(error);
         setError(error.message);
       });
   };
+
+  const userToDb = (name, email, role) => {
+    const user = { name, email, role };
+    console.log(user);
+
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const handleLoading = () => {
     setLoading(true);
   };

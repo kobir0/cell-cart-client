@@ -16,22 +16,20 @@ const Register = () => {
     const email = from.email.value;
     const name = from.name.value;
     const url = from.url.value;
-    const type = from.accType.value;
-    if (type === "Select Account Type") {
+    const role = from.accType.value;
+    if (role === "Select Account Type") {
       toast.error("Select Your Account Type");
       return;
     }
-
-    console.log(password, email, name, url, type);
 
     createUser(email, password)
       .then((userCredential) => {
         const user = userCredential.user;
         handleUpdateprofile(name, url);
 
-        console.log("signed", user);
-
-        // setLoading(false);
+        if (user.email) {
+          userToDb(name, user.email, role);
+        }
 
         toast.success("Registered successFully !!");
 
@@ -48,7 +46,6 @@ const Register = () => {
     const profile = { displayName: name, photoURL: url };
     updateProfileInfo(profile)
       .then(() => {
-        // setLoading(false);
         setError("");
         toast.success("Updated Profile");
       })
@@ -56,9 +53,28 @@ const Register = () => {
         toast.error(err.message);
       });
   };
-  //   const handleLoading = () => {
-  //     setLoading(true);
-  //   };
+
+  const userToDb = (name, email, role) => {
+    const user = { name, email, role };
+    console.log(user);
+
+    fetch("http://localhost:5000/users", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(user),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status) {
+          toast("added database");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   return (
     <div>
