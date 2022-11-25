@@ -17,6 +17,7 @@ const Brands = () => {
         {brands?.map((brand) => (
           <NavLink
             key={brand?._id}
+            to={`/brands/${brand?.brandId}`}
             className="  rounded-lg w-full h-20 hover:p-1 hover:shadow-2xl border flex justify-center border-black"
           >
             <img src={brand?.brandImg} className="p-2  h-full" alt=""></img>

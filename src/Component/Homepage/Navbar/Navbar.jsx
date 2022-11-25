@@ -6,14 +6,6 @@ import { AuthContext } from "../../SharedCompo/Context/UserContext";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
 
-  const brand = {
-    brandName: "Apple",
-    brandId: "1",
-    brandImg: "https://i.ibb.co/b64Gtmw/pngegg-1.png",
-  };
-  const json = JSON.stringify(brand);
-  console.log(json);
-
   const handleLogout = () => {
     logOut()
       .then(() => {

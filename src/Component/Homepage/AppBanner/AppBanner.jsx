@@ -20,13 +20,11 @@ const AppBanner = () => {
               <img
                 src="https://i.ibb.co/pzP2zrV/pngegg-3.png"
                 alt=""
-                srcset=""
                 className="h-20 p-1 cursor-pointer"
               />
               <img
                 src="https://i.ibb.co/vcpn7Xw/pngegg-4.png"
                 alt=""
-                srcset=""
                 className="h-24 pb-2  cursor-pointer"
               />
             </div>

@@ -8,6 +8,7 @@ import Main from "./Main";
 import MyProduct from "../../DashBoard/Seller/MyProduct";
 import Register from "../../Authentication/Register";
 import Login from "../../Authentication/Login";
+import Product from "../../ProductPage/Product.jsx/Product";
 
 const Routes = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const Routes = createBrowserRouter([
       {
         path: "/login",
         element: <Login></Login>,
+      },
+      {
+        path: "/brands/:id",
+        element: <Product></Product>,
       },
       {
         path: "/dashboard",
