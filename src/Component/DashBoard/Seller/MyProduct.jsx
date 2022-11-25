@@ -21,6 +21,8 @@ const MyProduct = () => {
     },
   });
 
+  console.log(products);
+
   const handleDelete = (id, product) => {
     const confirm = window.confirm(
       `Are you sure you want to delete ${product.brandName} ${product.model} ? `
@@ -43,6 +45,26 @@ const MyProduct = () => {
     } else {
       return;
     }
+  };
+
+  const handleAdvertise = (id, product) => {
+    const advetise = { advertiseItem: true };
+
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(advetise),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Advetised SuccessFully");
+          refetch();
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
   };
 
   if (isLoading) {
@@ -71,8 +93,18 @@ const MyProduct = () => {
                 <td>${product.sellingPrice}</td>
                 <td>{product.status}</td>
                 <td>
-                  {" "}
-                  <button className="btn btn-xs btn-outline">Advertise</button>
+                  {product?.reqField?.advertiseItem ? (
+                    <button className="btn btn-xs btn-success btn-outline">
+                      Advertised
+                    </button>
+                  ) : (
+                    <button
+                      onClick={() => handleAdvertise(product._id, product)}
+                      className="btn btn-xs btn-outline"
+                    >
+                      Advertise
+                    </button>
+                  )}
                 </td>
                 <td>
                   <button
