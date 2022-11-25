@@ -6,11 +6,12 @@ const AddProduct = () => {
   const { user } = useContext(AuthContext);
 
   const handleSubmit = (event) => {
+    const date = `'${new Date()}'`;
+    const time = date.split(" ");
+    const newTime = date.split(" ")[4];
+    const newDate = time.slice(1, 4).join("-");
     event.preventDefault();
     const target = event.target;
-
-    const date = `'${new Date()}'`;
-    const time = date.split(" ")[4];
 
     const brand = target.brand.value;
     const brandId = brand.split(" ")[0];
@@ -42,7 +43,8 @@ const AddProduct = () => {
       sellingReason,
       contactNumber,
       location,
-      time: time,
+      time: newTime,
+      date: newDate,
       email: user?.email,
       userImg: user?.photoURL,
       userName: user?.displayName,

@@ -9,6 +9,7 @@ import MyProduct from "../../DashBoard/Seller/MyProduct";
 import Register from "../../Authentication/Register";
 import Login from "../../Authentication/Login";
 import Product from "../../ProductPage/Product.jsx/Product";
+import PrivateRoute from "../../Authentication/PrivateRoute";
 
 const Routes = createBrowserRouter([
   {
@@ -34,11 +35,19 @@ const Routes = createBrowserRouter([
       },
       {
         path: "/brands/:id",
-        element: <Product ></Product>,
+        element: (
+          <PrivateRoute>
+            <Product></Product>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard",
-        element: <Dashboard></Dashboard>,
+        element: (
+          <PrivateRoute>
+            <Dashboard></Dashboard>
+          </PrivateRoute>
+        ),
         children: [
           {
             path: "/dashboard",

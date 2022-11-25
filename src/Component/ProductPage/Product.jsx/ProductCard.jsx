@@ -5,7 +5,6 @@ const ProductCard = ({ product }) => {
     brandName,
     condition,
     contactNumber,
-
     image,
     location,
     model,
@@ -26,7 +25,7 @@ const ProductCard = ({ product }) => {
           <img className="max-w-full" src={image} alt="" />
           <div className="m-3">
             <div className="flex">
-              <div className="avatar">
+              <div className="avatar mt-2">
                 <div className="w-12 h-12 rounded-full">
                   <img src={userImg} alt="" />
                 </div>
@@ -44,7 +43,10 @@ const ProductCard = ({ product }) => {
                     )}
                   </div>
                 </div>
-                <h1 className="text-xs mx-2 text-slate-500 ">{time}</h1>
+                <h1 className="text-xs mx-2 my-0 text-slate-500 ">{time}</h1>
+                <h1 className="text-xs mx-2 my-0 text-slate-500 ">
+                  {product?.date}
+                </h1>
               </div>
             </div>
             <h1 className="text-xl font-bold">

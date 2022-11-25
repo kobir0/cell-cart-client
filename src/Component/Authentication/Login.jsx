@@ -28,6 +28,8 @@ const Login = () => {
       .then((result) => {
         setLoading(false);
 
+        navigate(from, { replace: true });
+
         toast.success("Logged In SuccessFully !!");
       })
       .catch((error) => {
@@ -69,6 +71,8 @@ const Login = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+
+        navigate(from, { replace: true });
       })
       .catch((err) => {
         console.log(err);
