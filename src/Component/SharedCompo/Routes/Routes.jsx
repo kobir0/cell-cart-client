@@ -11,6 +11,9 @@ import Login from "../../Authentication/Login";
 import Product from "../../ProductPage/Product.jsx/Product";
 import PrivateRoute from "../../Authentication/PrivateRoute";
 
+import AllSeller from "../../DashBoard/Admin/AllSeller";
+import AllBuyers from "../../DashBoard/Admin/AllBuyers";
+
 const Routes = createBrowserRouter([
   {
     path: "/",
@@ -60,6 +63,14 @@ const Routes = createBrowserRouter([
           {
             path: "/dashboard/myProduct",
             element: <MyProduct></MyProduct>,
+          },
+          {
+            path: "/dashboard/allSellers",
+            element: <AllSeller></AllSeller>,
+          },
+          {
+            path: "/dashboard/allBuyers",
+            element: <AllBuyers></AllBuyers>,
           },
         ],
       },

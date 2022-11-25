@@ -48,7 +48,12 @@ const Login = () => {
         toast.success("You have Logged In SuccessFully !!");
 
         if (res.user.email) {
-          userToDb(res.user.displayName, res.user.email, "Buyer");
+          userToDb(
+            res.user.displayName,
+            res.user.email,
+            res.user.photoURL,
+            "Buyer"
+          );
         }
       })
       .catch((error) => {
@@ -57,8 +62,8 @@ const Login = () => {
       });
   };
 
-  const userToDb = (name, email, role) => {
-    const user = { name, email, role };
+  const userToDb = (name, email, img, role) => {
+    const user = { name, email, role, varified: false, img };
     console.log(user);
 
     fetch("http://localhost:5000/users", {

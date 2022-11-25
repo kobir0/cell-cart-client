@@ -1,7 +1,34 @@
-import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useContext, useEffect, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import { AuthContext } from "../../SharedCompo/Context/UserContext";
 
 const Dashboard = () => {
+  const { user } = useContext(AuthContext);
+
+  // const [userRole, setUserRole] = useState([]);
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/users/${user?.email}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setUserRole(data.user))
+  //     .catch((err) => console.error(err));
+  // }, [user?.email]);
+
+  const url = `http://localhost:5000/users/${user?.email}`;
+  const {
+    data: userRole = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["users", user?.email],
+    queryFn: async () => {
+      const res = await fetch(url);
+      const data = await res.json();
+      return data.user;
+    },
+  });
+
+  console.log(userRole);
   return (
     <div>
       <div>
@@ -31,12 +58,28 @@ const Dashboard = () => {
               className="drawer-overlay"
             ></label>
             <ul className="menu p-4 w-80  border bg-white text-base-content">
-              <li>
-                <NavLink to="../dashboard/addProduct"> Add Product</NavLink>
-              </li>
-              <li>
-                <NavLink to="../dashboard/myProduct"> My Product</NavLink>
-              </li>
+              {userRole?.role === "Seller" && (
+                <>
+                  {" "}
+                  <li>
+                    <NavLink to="../dashboard/addProduct"> Add Product</NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="../dashboard/myProduct"> My Product</NavLink>
+                  </li>
+                </>
+              )}
+
+              {userRole?.role === "Buyer" && (
+                <>
+                  <li>
+                    <NavLink to="../dashboard/allSellers"> All Seller </NavLink>
+                  </li>
+                  <li>
+                    <NavLink to="../dashboard/allBuyers"> All Buyer </NavLink>
+                  </li>
+                </>
+              )}
             </ul>
           </div>
         </div>

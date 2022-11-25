@@ -14,6 +14,10 @@ const Register = () => {
     const from = event.target;
     const password = from.password.value;
     const email = from.email.value;
+    const json = JSON.stringify(email);
+    const lowerString = json.toLowerCase();
+    const newEmail = JSON.parse(lowerString);
+
     const name = from.name.value;
     const url = from.url.value;
     const role = from.accType.value;
@@ -22,13 +26,13 @@ const Register = () => {
       return;
     }
 
-    createUser(email, password)
+    createUser(newEmail, password)
       .then((userCredential) => {
         const user = userCredential.user;
         handleUpdateprofile(name, url);
 
         if (user.email) {
-          userToDb(name, user.email, role);
+          userToDb(name, newEmail, url, role);
         }
 
         toast.success("Registered successFully !!");
@@ -54,8 +58,8 @@ const Register = () => {
       });
   };
 
-  const userToDb = (name, email, role) => {
-    const user = { name, email, role };
+  const userToDb = (name, email, img, role) => {
+    const user = { name, email, role, varified: false, img };
     console.log(user);
 
     fetch("http://localhost:5000/users", {
@@ -68,8 +72,9 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status) {
-          toast("added database");
+          toast.success("added database");
         }
+        console.log(data);
       })
       .catch((err) => {
         console.log(err);
