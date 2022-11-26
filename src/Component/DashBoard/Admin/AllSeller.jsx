@@ -1,5 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
+
 import Loading from "../../SharedCompo/Loading/Loading";
 
 const AllSeller = () => {
@@ -16,6 +18,53 @@ const AllSeller = () => {
       return data.users;
     },
   });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
+
+  const handleDelete = (id, user) => {
+    const confirm = window.confirm(
+      `Are you sure you want to delete ${user.email}  ? `
+    );
+
+    if (confirm) {
+      fetch(`http://localhost:5000/users/${id}`, {
+        method: "DELETE",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status) {
+            toast.success(data.message);
+          } else {
+            toast.error(data.message);
+          }
+          refetch();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      return;
+    }
+  };
+
+  const handleVerify = (id) => {
+    const data = { varified: true };
+
+    fetch(`http://localhost:5000/users/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Verified SuccessFully");
+          refetch();
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
 
   return (
     <div>
@@ -23,11 +72,12 @@ const AllSeller = () => {
         <table className="table w-full">
           <thead>
             <tr>
-              <th>Product Name</th>
-              <th>Price</th>
-              <th>Current Status</th>
-              <th>Advertisement</th>
-              <th>Delete Product</th>
+              <th></th>
+              <th>User Name</th>
+              <th>Email</th>
+              <th>Account Type</th>
+              <th>Verify Status</th>
+              <th>Delete User</th>
             </tr>
           </thead>
           <tbody>
@@ -35,8 +85,13 @@ const AllSeller = () => {
               users?.map((user, i) => (
                 <tr key={i}>
                   <td>
-                    {i + 1}: {user?.name}
+                    <div className="avatar">
+                      <div className="w-10 rounded-full">
+                        <img src={user.img} alt="" />
+                      </div>
+                    </div>
                   </td>
+                  <td>{user?.name}</td>
                   <td>{user?.email}</td>
                   <td>{user?.role}</td>
                   <td>
@@ -46,7 +101,7 @@ const AllSeller = () => {
                       </button>
                     ) : (
                       <button
-                        //   onClick={() => handleAdvertise(product._id, product)}
+                        onClick={() => handleVerify(user._id)}
                         className="btn btn-xs btn-outline"
                       >
                         Verify
@@ -55,7 +110,7 @@ const AllSeller = () => {
                   </td>
                   <td>
                     <button
-                      // onClick={() => handleDelete(product._id, product)}
+                      onClick={() => handleDelete(user._id, user)}
                       className="btn btn-xs btn-error btn-outline"
                     >
                       Delete

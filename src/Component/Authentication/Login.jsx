@@ -5,11 +5,11 @@ import { AuthContext } from "../SharedCompo/Context/UserContext";
 
 const Login = () => {
   const [Error, setError] = useState("");
-  const [userEmail, setUserEmail] = useState("");
+  // const [userEmail, setUserEmail] = useState("");
   const { logIn, signInWithPopGoogle } = useContext(AuthContext);
   const [loading, setLoading] = useState(false);
 
-  console.log(userEmail);
+  // console.log(userEmail);
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -77,7 +77,9 @@ const Login = () => {
       .then((data) => {
         console.log(data);
 
-        navigate(from, { replace: true });
+        if (data.email) {
+          navigate(from, { replace: true });
+        }
       })
       .catch((err) => {
         console.log(err);

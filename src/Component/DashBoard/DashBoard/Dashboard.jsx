@@ -1,7 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../../SharedCompo/Context/UserContext";
+import Loading from "../../SharedCompo/Loading/Loading";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
@@ -15,11 +16,7 @@ const Dashboard = () => {
   // }, [user?.email]);
 
   const url = `http://localhost:5000/users/${user?.email}`;
-  const {
-    data: userRole = [],
-    isLoading,
-    refetch,
-  } = useQuery({
+  const { data: userRole = [], isLoading } = useQuery({
     queryKey: ["users", user?.email],
     queryFn: async () => {
       const res = await fetch(url);
@@ -27,6 +24,9 @@ const Dashboard = () => {
       return data.user;
     },
   });
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
 
   console.log(userRole);
   return (
@@ -70,7 +70,7 @@ const Dashboard = () => {
                 </>
               )}
 
-              {userRole?.role === "Buyer" && (
+              {userRole?.role === "Admin" && (
                 <>
                   <li>
                     <NavLink to="../dashboard/allSellers"> All Seller </NavLink>
