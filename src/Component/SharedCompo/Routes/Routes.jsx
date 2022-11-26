@@ -10,12 +10,12 @@ import Register from "../../Authentication/Register";
 import Login from "../../Authentication/Login";
 import Product from "../../ProductPage/Product.jsx/Product";
 import PrivateRoute from "../../Authentication/PrivateRoute";
-
 import AllSeller from "../../DashBoard/Admin/AllSeller";
 import AllBuyers from "../../DashBoard/Admin/AllBuyers";
 import AdminRoute from "../../Authentication/AdminRoute";
 import SellerRoute from "../../Authentication/SellerRoute";
 import Blog from "../../Homepage/BlogPage/Blog";
+import ReportedProduct from "../../DashBoard/Admin/ReportedProduct";
 
 const Routes = createBrowserRouter([
   {
@@ -84,6 +84,14 @@ const Routes = createBrowserRouter([
             element: (
               <AdminRoute>
                 <AllSeller></AllSeller>
+              </AdminRoute>
+            ),
+          },
+          {
+            path: "/dashboard/reported",
+            element: (
+              <AdminRoute>
+                <ReportedProduct></ReportedProduct>
               </AdminRoute>
             ),
           },

@@ -7,8 +7,12 @@ import ProductCard from "./ProductCard";
 const Product = () => {
   let { id } = useParams();
   const url = `http://localhost:5000/products/${id}`;
-  const { data: products = [], isLoading } = useQuery({
-    queryKey: ["brands"],
+  const {
+    data: products = [],
+    isLoading,
+    refetch,
+  } = useQuery({
+    queryKey: ["products"],
     queryFn: async () => {
       const res = await fetch(url);
       const data = await res.json();
@@ -21,9 +25,13 @@ const Product = () => {
   }
 
   return (
-    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-2">
+    <div className="min-h-screen grid grid-cols-1 lg:grid-cols-3">
       {products?.map((product) => (
-        <ProductCard key={product._id} product={product}></ProductCard>
+        <ProductCard
+          key={product._id}
+          refreash={refetch}
+          product={product}
+        ></ProductCard>
       ))}
     </div>
   );

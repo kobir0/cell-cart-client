@@ -71,6 +71,12 @@ const Dashboard = () => {
                   <li>
                     <NavLink to="../dashboard/allBuyers"> All Buyer </NavLink>
                   </li>
+                  <li>
+                    <NavLink to="../dashboard/reported">
+                      {" "}
+                      Reported Product
+                    </NavLink>
+                  </li>
                 </>
               )}
             </ul>

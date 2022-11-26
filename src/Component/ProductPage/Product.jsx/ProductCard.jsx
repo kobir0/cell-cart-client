@@ -1,8 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
+import toast from "react-hot-toast";
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, refreash }) => {
   const {
+    _id,
+
+    reported,
     brandName,
     condition,
     contactNumber,
@@ -30,36 +34,71 @@ const ProductCard = ({ product }) => {
     },
   });
 
+  const handleReport = (id) => {
+    console.log(id);
+    const report = { reported: true };
+
+    fetch(`http://localhost:5000/products/${id}`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(report),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.modifiedCount > 0) {
+          toast.success("Reported SuccessFully");
+          refreash();
+        }
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
+
   return (
-    <div className="m-5">
-      <div className="hero   bg-base-200">
+    <div className="m-5 ">
+      <div className="hero rounded-lg  bg-base-200">
         <div className=" ">
           <img className="max-w-full" src={image} alt="" />
           <div className="m-3">
-            <div className="flex">
-              <div className="avatar mt-2">
-                <div className="w-12 h-12 rounded-full">
-                  <img src={userImg} alt="" />
-                </div>
-              </div>
-              <div>
-                <div className=" mx-2">
-                  <div className="flex">
-                    <h1 className="text-lg font-semibold">{userName}</h1>
-                    {user?.varified && (
-                      <img
-                        src="https://i.ibb.co/QJRDkd3/Blue-check-mark-icon-on-transparent-background-PNG.png"
-                        className=" w-5 h-5 mt-1"
-                        alt=""
-                      />
-                    )}
+            <div className="flex justify-between">
+              <div className="flex">
+                <div className="avatar mt-2">
+                  <div className="w-12 h-12 rounded-full">
+                    <img src={userImg} alt="" />
                   </div>
                 </div>
-                <h1 className="text-xs mx-2 my-0 text-slate-500 ">{time}</h1>
-                <h1 className="text-xs mx-2 my-0 text-slate-500 ">
-                  {product?.date}
-                </h1>
+                <div>
+                  <div className=" mx-2">
+                    <div className="flex">
+                      <h1 className="text-lg font-semibold">{userName}</h1>
+                      {user?.varified && (
+                        <img
+                          src="https://i.ibb.co/QJRDkd3/Blue-check-mark-icon-on-transparent-background-PNG.png"
+                          className=" w-5 h-5 mt-1"
+                          alt=""
+                        />
+                      )}
+                    </div>
+                  </div>
+                  <h1 className="text-xs mx-2 my-0 text-slate-500 ">{time}</h1>
+                  <h1 className="text-xs mx-2 my-0 text-slate-500 ">
+                    {product?.date}
+                  </h1>
+                </div>
               </div>
+              {reported ? (
+                <button className="btn btn-xs btn-disabled ">
+                  Report To Admin
+                </button>
+              ) : (
+                <button
+                  onClick={() => handleReport(_id)}
+                  className="btn btn-xs "
+                >
+                  Report To Admin
+                </button>
+              )}
             </div>
             <h1 className="text-xl font-bold">
               {brandName} {model}
