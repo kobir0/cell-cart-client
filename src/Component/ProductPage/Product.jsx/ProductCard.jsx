@@ -1,3 +1,4 @@
+import { useQuery } from "@tanstack/react-query";
 import React from "react";
 
 const ProductCard = ({ product }) => {
@@ -15,9 +16,20 @@ const ProductCard = ({ product }) => {
     usedYear,
     userImg,
     userName,
-    userVerified,
+    email,
     sellingReason,
   } = product;
+
+  const url = `http://localhost:5000/users/${email}`;
+  const { data: user = [] } = useQuery({
+    queryKey: ["users", email],
+    queryFn: async () => {
+      const res = await fetch(url);
+      const data = await res.json();
+      return data.user;
+    },
+  });
+
   return (
     <div className="m-5">
       <div className="hero   bg-base-200">
@@ -34,7 +46,7 @@ const ProductCard = ({ product }) => {
                 <div className=" mx-2">
                   <div className="flex">
                     <h1 className="text-lg font-semibold">{userName}</h1>
-                    {userVerified && (
+                    {user?.varified && (
                       <img
                         src="https://i.ibb.co/QJRDkd3/Blue-check-mark-icon-on-transparent-background-PNG.png"
                         className=" w-5 h-5 mt-1"

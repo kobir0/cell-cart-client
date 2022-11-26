@@ -7,7 +7,6 @@ const Login = () => {
   const [Error, setError] = useState("");
   // const [userEmail, setUserEmail] = useState("");
   const { logIn, signInWithPopGoogle } = useContext(AuthContext);
-  const [loading, setLoading] = useState(false);
 
   // console.log(userEmail);
   const navigate = useNavigate();
@@ -20,14 +19,9 @@ const Login = () => {
     const password = form.password.value;
     const email = form.email.value;
 
-    if (password.length < 5) {
-      setLoading(false);
-    }
-
     logIn(email, password)
       .then((result) => {
-        setLoading(false);
-
+        console.log(result);
         navigate(from, { replace: true });
 
         toast.success("Logged In SuccessFully !!");
@@ -86,10 +80,6 @@ const Login = () => {
       });
   };
 
-  const handleLoading = () => {
-    setLoading(true);
-  };
-
   return (
     <div>
       <div className="hero min-h-screen bg-base-200">
@@ -127,15 +117,12 @@ const Login = () => {
                 />
                 <label className="label ">
                   <>
-                    <span className="text-teal-800 font-semibold">
-                      {" "}
-                      New User ?
-                    </span>{" "}
+                    <span className=" font-semibold"> New User ?</span>{" "}
                     <NavLink
                       to={"../register"}
                       className="label-text-alt link link-hover"
                     >
-                      <button className="btn btn-xs btn-success ">
+                      <button className="btn btn-xs btn-outline ">
                         Click to Register
                       </button>
                     </NavLink>
@@ -144,19 +131,9 @@ const Login = () => {
                 <p className="text-red-600">{Error}</p>
               </div>
               <div className="form-control mt-6 border-none">
-                {loading ? (
-                  <button className="btn btn-outline shadow-lg shadow-teal-100 btn-success">
-                    Loading...
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleLoading}
-                    className="btn btn-outline shadow-lg shadow-teal-100 btn-success"
-                  >
-                    Login
-                  </button>
-                )}
+                <button className="btn btn-outline shadow-2xl  ">Login</button>
               </div>
+              <div className="divider text-xs my-2">OR SIGN IN WITH</div>
               <div className="flex justify-center">
                 <button className="flex  m-2" onClick={handleGooglePopUp}>
                   <img

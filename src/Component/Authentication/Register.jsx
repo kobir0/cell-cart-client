@@ -5,7 +5,7 @@ import { AuthContext } from "../SharedCompo/Context/UserContext";
 
 const Register = () => {
   const [Error, setError] = useState("");
-  const { createUser, updateProfileInfo } = useContext(AuthContext);
+  const { createUser, updateProfileInfo, logOut } = useContext(AuthContext);
   //   const [loading, setLoading] = useState(false);
   //   const navigate = useNavigate();
 
@@ -21,14 +21,19 @@ const Register = () => {
     const name = from.name.value;
     const url = from.url.value;
     const role = from.accType.value;
-    if (role === "Select Account Type") {
-      toast.error("Select Your Account Type");
-      return;
-    }
+
+    console.log(role, password, newEmail, name, url);
 
     createUser(newEmail, password)
       .then((userCredential) => {
         const user = userCredential.user;
+        if (user.email) {
+          logOut()
+            .then(() => {})
+            .catch((err) => {
+              console.error(err);
+            });
+        }
         handleUpdateprofile(name, url);
 
         if (user.email) {
@@ -141,22 +146,28 @@ const Register = () => {
                   required
                 />
                 <label className="label ">
-                  <select
-                    defaultValue="Select Account Type"
-                    name="accType"
-                    type="text"
-                    className="select select-bordered select-sm w-full  max-w-xs"
-                    required
-                  >
-                    <option value="Select Account Type" disabled selected>
-                      Select Account Type
-                    </option>
-                    <option value="Seller">Seller</option>
-                    <option value="Buyer">Buyer</option>
-                  </select>
+                  <label className="label">
+                    <span className="label-text">Select Your Account Type</span>
+                  </label>
+
+                  <div>
+                    <select
+                      defaultValue="Select Account Type"
+                      name="accType"
+                      type="text"
+                      className="select select-bordered select-sm w-full  max-w-xs"
+                      required
+                    >
+                      <option value="Buyer" selected>
+                        Buyer
+                      </option>
+                      <option value="Seller">Seller</option>
+                    </select>
+                  </div>
                 </label>
                 <p className="text-red-600">{Error}</p>
               </div>
+
               <div className="flex">
                 <span className=" font-semibold mr-1">
                   {" "}
@@ -166,24 +177,13 @@ const Register = () => {
                   to={"../login"}
                   className="label-text-alt link link-hover"
                 >
-                  <button className="btn btn-xs btn-outline  w-20">
+                  <button className="btn btn-xs btn-outline ml-4  w-20">
                     Log In{" "}
                   </button>
                 </NavLink>
               </div>
-              <div className="form-control mt-6 border-none">
-                {/* {loading ? (
-                  <button className="btn btn-outline shadow-lg shadow-teal-100 btn-success">
-                    Loading...
-                  </button>
-                ) : (
-                  <button
-                    onClick={handleLoading}
-                    className="btn btn-outline shadow-lg shadow-teal-100 btn-success"
-                  >
-                    Register
-                  </button>
-                )} */}
+              <div className="divider text-xs my-2">OR </div>
+              <div className="form-control mt-2 border-none">
                 <button className="btn btn-outline shadow-2xl">Register</button>
               </div>
             </div>

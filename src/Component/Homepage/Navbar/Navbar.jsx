@@ -46,7 +46,7 @@ const Navbar = () => {
                 <NavLink to="/home">Home</NavLink>
               </li>
               <li>
-                <NavLink to="/dashboard">Dash Board</NavLink>
+                <NavLink to="/blog">Blog</NavLink>
               </li>
             </ul>
           </div>
@@ -57,6 +57,11 @@ const Navbar = () => {
           </NavLink>
         </div>
         <div className="navbar-end">
+          {user?.email && (
+            <NavLink to="/dashboard" className="btn btn-outline mx-1 btn-xs">
+              Dash Board
+            </NavLink>
+          )}
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">

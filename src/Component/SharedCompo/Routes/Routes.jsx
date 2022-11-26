@@ -13,6 +13,9 @@ import PrivateRoute from "../../Authentication/PrivateRoute";
 
 import AllSeller from "../../DashBoard/Admin/AllSeller";
 import AllBuyers from "../../DashBoard/Admin/AllBuyers";
+import AdminRoute from "../../Authentication/AdminRoute";
+import SellerRoute from "../../Authentication/SellerRoute";
+import Blog from "../../Homepage/BlogPage/Blog";
 
 const Routes = createBrowserRouter([
   {
@@ -27,6 +30,10 @@ const Routes = createBrowserRouter([
       {
         path: "/home",
         element: <Home></Home>,
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
       },
       {
         path: "/register",
@@ -58,19 +65,35 @@ const Routes = createBrowserRouter([
           },
           {
             path: "/dashboard/addProduct",
-            element: <AddProduct></AddProduct>,
+            element: (
+              <SellerRoute>
+                <AddProduct></AddProduct>
+              </SellerRoute>
+            ),
           },
           {
             path: "/dashboard/myProduct",
-            element: <MyProduct></MyProduct>,
+            element: (
+              <SellerRoute>
+                <MyProduct></MyProduct>
+              </SellerRoute>
+            ),
           },
           {
             path: "/dashboard/allSellers",
-            element: <AllSeller></AllSeller>,
+            element: (
+              <AdminRoute>
+                <AllSeller></AllSeller>
+              </AdminRoute>
+            ),
           },
           {
             path: "/dashboard/allBuyers",
-            element: <AllBuyers></AllBuyers>,
+            element: (
+              <AdminRoute>
+                <AllBuyers></AllBuyers>
+              </AdminRoute>
+            ),
           },
         ],
       },

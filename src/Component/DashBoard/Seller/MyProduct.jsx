@@ -21,8 +21,6 @@ const MyProduct = () => {
     },
   });
 
-  console.log(products);
-
   const handleDelete = (id, product) => {
     const confirm = window.confirm(
       `Are you sure you want to delete ${product.brandName} ${product.model} ? `
@@ -93,7 +91,7 @@ const MyProduct = () => {
                 <td>${product.sellingPrice}</td>
                 <td>{product.status}</td>
                 <td>
-                  {product?.reqField?.advertiseItem ? (
+                  {product?.advertiseItem ? (
                     <button className="btn btn-xs btn-success btn-outline">
                       Advertised
                     </button>

@@ -14,7 +14,7 @@ const AdvertiseProduct = () => {
 
   return (
     <div>
-      <h1>Advertise Product</h1>
+      <h1>{products?.length}</h1>
     </div>
   );
 };

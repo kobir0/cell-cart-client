@@ -1,32 +1,25 @@
-import { useQuery } from "@tanstack/react-query";
 import React, { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../../SharedCompo/Context/UserContext";
-import Loading from "../../SharedCompo/Loading/Loading";
+import useRole from "../../SharedCompo/Hooks/useRole";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
 
-  // const [userRole, setUserRole] = useState([]);
-  // useEffect(() => {
-  //   fetch(`http://localhost:5000/users/${user?.email}`)
-  //     .then((res) => res.json())
-  //     .then((data) => setUserRole(data.user))
-  //     .catch((err) => console.error(err));
-  // }, [user?.email]);
+  const [userRole] = useRole(user?.email);
 
-  const url = `http://localhost:5000/users/${user?.email}`;
-  const { data: userRole = [], isLoading } = useQuery({
-    queryKey: ["users", user?.email],
-    queryFn: async () => {
-      const res = await fetch(url);
-      const data = await res.json();
-      return data.user;
-    },
-  });
-  if (isLoading) {
-    return <Loading></Loading>;
-  }
+  // const url = `http://localhost:5000/users/${user?.email}`;
+  // const { data: userRole = [], isLoading } = useQuery({
+  //   queryKey: ["users", user?.email],
+  //   queryFn: async () => {
+  //     const res = await fetch(url);
+  //     const data = await res.json();
+  //     return data.user;
+  //   },
+  // });
+  // if (isLoading) {
+  //   return <Loading></Loading>;
+  // }
 
   console.log(userRole);
   return (
