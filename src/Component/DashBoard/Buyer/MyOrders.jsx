@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
+
 import React, { useContext } from "react";
 import { AuthContext } from "../../SharedCompo/Context/UserContext";
+import Loading from "../../SharedCompo/Loading/Loading";
 
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
@@ -9,7 +11,7 @@ const MyOrders = () => {
   const {
     data: orders = [],
     isLoading,
-    refetch,
+    // refetch,
   } = useQuery({
     queryKey: ["orders", user?.email],
     queryFn: async () => {
@@ -18,7 +20,9 @@ const MyOrders = () => {
       return data.orders;
     },
   });
-
+  if (isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <div>
       <div className="overflow-x-auto">
@@ -44,7 +48,7 @@ const MyOrders = () => {
                     />{" "}
                   </th>
                   <td>{order.productName}</td>
-                  <td>{order.price}</td>
+                  <td> ${order.price}</td>
                   <td>
                     <button className="btn btn-xs btn-outline"> Pay Now</button>
                   </td>

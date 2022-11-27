@@ -56,7 +56,6 @@ const Register = () => {
     updateProfileInfo(profile)
       .then(() => {
         setError("");
-        toast.success("Updated Profile");
       })
       .catch((err) => {
         toast.error(err.message);

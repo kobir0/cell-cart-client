@@ -1,10 +1,15 @@
 import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { NavLink, useLocation } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
+import useRole from "../Hooks/useRole";
 
 const Modal = ({ product }) => {
   const { user } = useContext(AuthContext);
   const { brandName, model, sellingPrice, _id, image } = product;
+
+  const [userRole] = useRole(user?.email);
+  const location = useLocation();
 
   const handleBooking = (event) => {
     event.preventDefault();
@@ -47,10 +52,6 @@ const Modal = ({ product }) => {
   };
   return (
     <div>
-      {/* The button to open modal */}
-
-      {/* Put this part before </body> tag */}
-
       <>
         {" "}
         <input type="checkbox" id="my-modal" className="modal-toggle" />
@@ -62,56 +63,77 @@ const Modal = ({ product }) => {
             >
               ✕
             </label>
-            <form onSubmit={handleBooking} className="grid grid-cols-1 gap-3">
-              <h1 className="text-xl text-center font-semibold">
-                Please Fill Up The From
-              </h1>
-              <input
-                type="text"
-                name="productName"
-                disabled
-                value={`${brandName} ${model}`}
-                className="input input-bordered w-full  "
-              />
-              <input
-                type="text"
-                name="price"
-                disabled
-                value={`$${sellingPrice}`}
-                className="input input-bordered w-full  "
-              />
-              <input
-                type="text"
-                name="buyerName"
-                className="input input-bordered w-full  "
-                value={user?.displayName}
-                disabled
-              />
-              <input
-                type="text"
-                name="email"
-                className="input input-bordered w-full  "
-                value={user?.email}
-                disabled
-              />
-              <input
-                type="text"
-                name="number"
-                placeholder="your contact number"
-                className="input input-bordered w-full  "
-                required
-              />
-              <input
-                type="text"
-                name="location"
-                placeholder="your meeting location"
-                className="input input-bordered w-full  "
-                required
-              />
-              <button className="btn  btn-outline w-full shadow-xl">
-                Submit
-              </button>
-            </form>
+            {user?.email && userRole?.role === "Buyer" ? (
+              <form onSubmit={handleBooking} className="grid grid-cols-1 gap-3">
+                <h1 className="text-xl text-center font-semibold">
+                  Please Fill Up The From
+                </h1>
+                <input
+                  type="text"
+                  name="productName"
+                  disabled
+                  value={`${brandName} ${model}`}
+                  className="input input-bordered w-full  "
+                />
+                <input
+                  type="text"
+                  name="price"
+                  disabled
+                  value={`${sellingPrice}`}
+                  className="input input-bordered w-full  "
+                />
+                <input
+                  type="text"
+                  name="buyerName"
+                  className="input input-bordered w-full  "
+                  value={user?.displayName}
+                  disabled
+                />
+                <input
+                  type="text"
+                  name="email"
+                  className="input input-bordered w-full  "
+                  value={user?.email}
+                  disabled
+                />
+                <input
+                  type="text"
+                  name="number"
+                  placeholder="your contact number"
+                  className="input input-bordered w-full  "
+                  required
+                />
+                <input
+                  type="text"
+                  name="location"
+                  placeholder="your meeting location"
+                  className="input input-bordered w-full  "
+                  required
+                />
+                <button className="btn  btn-outline w-full shadow-xl">
+                  Submit
+                </button>
+              </form>
+            ) : (
+              <>
+                {" "}
+                <div className="flex justify-center">
+                  <NavLink
+                    to="/login"
+                    state={{ from: location }}
+                    replace
+                    className="btn btn-wide "
+                  >
+                    Log in
+                  </NavLink>
+                </div>
+                <h1 className="text-center m-3 text-lg">
+                  {" "}
+                  <span className="text-blue-800 font-bold">Note:</span> Login
+                  as a buyer account.{" "}
+                </h1>
+              </>
+            )}
           </div>
         </div>
       </>

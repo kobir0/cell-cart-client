@@ -22,9 +22,10 @@ const Login = () => {
     logIn(email, password)
       .then((result) => {
         console.log(result);
-        navigate(from, { replace: true });
-
-        toast.success("Logged In SuccessFully !!");
+        if (result?.user?.email) {
+          navigate(from, { replace: true });
+          toast.success("Logged In SuccessFully !!");
+        }
       })
       .catch((error) => {
         setError(error.message);
@@ -40,7 +41,7 @@ const Login = () => {
     signInWithPopGoogle()
       .then((res) => {
         toast.success("You have Logged In SuccessFully !!");
-
+        navigate(from, { replace: true });
         if (res.user.email) {
           userToDb(
             res.user.displayName,
@@ -69,8 +70,6 @@ const Login = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
-
         if (data?.email) {
           navigate(from, { replace: true });
         }

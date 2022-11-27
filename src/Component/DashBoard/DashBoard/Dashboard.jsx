@@ -8,20 +8,6 @@ const Dashboard = () => {
 
   const [userRole] = useRole(user?.email);
 
-  // const url = `http://localhost:5000/users/${user?.email}`;
-  // const { data: userRole = [], isLoading } = useQuery({
-  //   queryKey: ["users", user?.email],
-  //   queryFn: async () => {
-  //     const res = await fetch(url);
-  //     const data = await res.json();
-  //     return data.user;
-  //   },
-  // });
-  // if (isLoading) {
-  //   return <Loading></Loading>;
-  // }
-
-  console.log(userRole);
   return (
     <div>
       <div>
