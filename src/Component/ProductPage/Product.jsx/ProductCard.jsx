@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import toast from "react-hot-toast";
+import Modal from "../../SharedCompo/Modal/Modal";
 
 const ProductCard = ({ product, refreash }) => {
   const {
     _id,
-
     reported,
     brandName,
     condition,
@@ -57,7 +57,7 @@ const ProductCard = ({ product, refreash }) => {
 
   return (
     <div className="m-5 ">
-      <div className="hero rounded-lg  bg-base-200">
+      <div className="hero shadow-xl rounded-lg  bg-slate-200">
         <div className=" ">
           <img className="max-w-full" src={image} alt="" />
           <div className="m-3">
@@ -132,7 +132,12 @@ const ProductCard = ({ product, refreash }) => {
                 </h1>
               </div>
             </div>
-            <button className="btn  my-3 btn-sm">Book Now</button>
+            <div className="flex justify-center">
+              <label htmlFor="my-modal" className="btn btn-sm my-2">
+                Book Now
+              </label>
+            </div>
+            <Modal product={product}></Modal>
           </div>
         </div>
       </div>

@@ -16,6 +16,8 @@ import AdminRoute from "../../Authentication/AdminRoute";
 import SellerRoute from "../../Authentication/SellerRoute";
 import Blog from "../../Homepage/BlogPage/Blog";
 import ReportedProduct from "../../DashBoard/Admin/ReportedProduct";
+import MyOrders from "../../DashBoard/Buyer/MyOrders";
+import BuyerRoute from "../../Authentication/BuyerRoute";
 
 const Routes = createBrowserRouter([
   {
@@ -77,6 +79,14 @@ const Routes = createBrowserRouter([
               <SellerRoute>
                 <MyProduct></MyProduct>
               </SellerRoute>
+            ),
+          },
+          {
+            path: "/dashboard/myOrders",
+            element: (
+              <BuyerRoute>
+                <MyOrders></MyOrders>
+              </BuyerRoute>
             ),
           },
           {
