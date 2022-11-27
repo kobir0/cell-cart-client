@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import Loading from "../../SharedCompo/Loading/Loading";
 
 const AllBuyers = () => {
-  const url = `http://localhost:5000/users?name=Buyer`;
+  const url = `https://cell-cart-server.onrender.com/users?name=Buyer`;
   const {
     data: users = [],
     isLoading,
@@ -25,7 +25,7 @@ const AllBuyers = () => {
     );
 
     if (confirm) {
-      fetch(`http://localhost:5000/users/${id}`, {
+      fetch(`https://cell-cart-server.onrender.com/users/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

@@ -6,12 +6,9 @@ const Errorpage = () => {
     <div className="text-center">
       <div className="flex justify-center">
         {" "}
-        <img
-          src="https://thumbs.gfycat.com/ImperfectPracticalGoldfish-size_restricted.gif"
-          alt=""
-        />
+        <img src="https://media.tenor.com/OyUVgQi-l-QAAAAC/404.gif" alt="" />
       </div>
-      <h1 className="text-2xl font-bold my-5 text-blue-500">
+      <h1 className="text-2xl font-bold my-5 text-red-500">
         Page you are looking for is not found.
       </h1>
       <NavLink to="/home ">

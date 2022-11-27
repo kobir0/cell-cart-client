@@ -11,7 +11,7 @@ const Login = () => {
   // console.log(userEmail);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "/home";
+  const from = location.state?.from?.pathname || "../dashboard" || "../home";
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -41,8 +41,8 @@ const Login = () => {
     signInWithPopGoogle()
       .then((res) => {
         toast.success("You have Logged In SuccessFully !!");
-        navigate(from, { replace: true });
-        if (res.user.email) {
+
+        if (res?.user?.email) {
           userToDb(
             res.user.displayName,
             res.user.email,
@@ -61,7 +61,7 @@ const Login = () => {
     const user = { name, email, role, varified: false, img };
     console.log(user);
 
-    fetch("http://localhost:5000/users", {
+    fetch("https://cell-cart-server.onrender.com/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -18,6 +18,7 @@ import Blog from "../../Homepage/BlogPage/Blog";
 import ReportedProduct from "../../DashBoard/Admin/ReportedProduct";
 import MyOrders from "../../DashBoard/Buyer/MyOrders";
 import BuyerRoute from "../../Authentication/BuyerRoute";
+import Payment from "../../DashBoard/Buyer/Payment";
 
 const Routes = createBrowserRouter([
   {
@@ -86,6 +87,18 @@ const Routes = createBrowserRouter([
             element: (
               <BuyerRoute>
                 <MyOrders></MyOrders>
+              </BuyerRoute>
+            ),
+          },
+          {
+            path: "/dashboard/payment/:id",
+            loader: ({ params }) =>
+              fetch(
+                `https://cell-cart-server.onrender.com/orders/${params?.id}`
+              ),
+            element: (
+              <BuyerRoute>
+                <Payment></Payment>
               </BuyerRoute>
             ),
           },

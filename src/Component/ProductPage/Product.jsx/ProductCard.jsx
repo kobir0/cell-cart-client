@@ -24,7 +24,7 @@ const ProductCard = ({ product, refreash }) => {
     sellingReason,
   } = product;
 
-  const url = `http://localhost:5000/users/${email}`;
+  const url = `https://cell-cart-server.onrender.com/users/${email}`;
   const { data: user = [] } = useQuery({
     queryKey: ["users", email],
     queryFn: async () => {
@@ -38,7 +38,7 @@ const ProductCard = ({ product, refreash }) => {
     console.log(id);
     const report = { reported: true };
 
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://cell-cart-server.onrender.com/products/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(report),

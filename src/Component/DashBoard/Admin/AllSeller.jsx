@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 import Loading from "../../SharedCompo/Loading/Loading";
 
 const AllSeller = () => {
-  const url = `http://localhost:5000/users?name=Seller`;
+  const url = `https://cell-cart-server.onrender.com/users?name=Seller`;
   const {
     data: users = [],
     isLoading,
@@ -28,7 +28,7 @@ const AllSeller = () => {
     );
 
     if (confirm) {
-      fetch(`http://localhost:5000/users/${id}`, {
+      fetch(`https://cell-cart-server.onrender.com/users/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -49,7 +49,7 @@ const AllSeller = () => {
   const handleVerify = (id) => {
     const data = { varified: true };
 
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://cell-cart-server.onrender.com/users/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
