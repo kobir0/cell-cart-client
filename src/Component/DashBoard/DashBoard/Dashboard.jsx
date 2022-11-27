@@ -5,7 +5,6 @@ import useRole from "../../SharedCompo/Hooks/useRole";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
-
   const [userRole] = useRole(user?.email);
 
   return (

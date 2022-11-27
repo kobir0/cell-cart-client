@@ -98,7 +98,6 @@ const CheackOut = ({ booking }) => {
           toast.error(err.message);
         });
     }
-    console.log("payment intent", paymentIntent);
 
     if (success) {
       toast.success(success);
