@@ -3,7 +3,7 @@ import React from "react";
 import toast from "react-hot-toast";
 import Modal from "../../SharedCompo/Modal/Modal";
 
-const ProductCard = ({ product, refreash }) => {
+const ProductCard = ({ product, refreash, modalnumber }) => {
   const {
     _id,
     reported,
@@ -133,11 +133,15 @@ const ProductCard = ({ product, refreash }) => {
               </div>
             </div>
             <div className="flex justify-center">
-              <label htmlFor="my-modal" className="btn btn-sm my-2">
+              <label
+                htmlFor={`modal-${modalnumber}`}
+                className="btn btn-sm my-2"
+              >
                 Book Now
               </label>
+
+              <Modal product={product} modalId={modalnumber}></Modal>
             </div>
-            <Modal product={product}></Modal>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import { AuthContext } from "../Context/UserContext";
 import useRole from "../Hooks/useRole";
 
-const Modal = ({ product }) => {
+const Modal = ({ product, modalId }) => {
   const { user } = useContext(AuthContext);
   const { brandName, model, sellingPrice, _id, image } = product;
 
@@ -54,11 +54,15 @@ const Modal = ({ product }) => {
     <div>
       <>
         {" "}
-        <input type="checkbox" id="my-modal" className="modal-toggle" />
+        <input
+          type="checkbox"
+          id={`modal-${modalId}`}
+          className="modal-toggle"
+        />
         <div className="modal">
           <div className="modal-box w-96 relative">
             <label
-              htmlFor="my-modal"
+              htmlFor={`modal-${modalId}`}
               className="btn btn-sm btn-circle absolute right-2 top-2"
             >
               ✕

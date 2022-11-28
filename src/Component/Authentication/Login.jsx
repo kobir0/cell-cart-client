@@ -11,7 +11,7 @@ const Login = () => {
   // console.log(userEmail);
   const navigate = useNavigate();
   const location = useLocation();
-  const from = location.state?.from?.pathname || "../dashboard" || "../home";
+  const from = location.state?.from?.pathname || "../home";
 
   const handleSubmit = (event) => {
     event.preventDefault();

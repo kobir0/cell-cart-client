@@ -63,6 +63,7 @@ const AddProduct = () => {
       .then((data) => {
         if (data.status) {
           toast.success(data.message);
+          target.reset();
         }
       })
       .catch((err) => {
@@ -143,7 +144,7 @@ const AddProduct = () => {
           <textarea
             className="textarea mt-2 w-full  textarea-bordered"
             name="sellingReason"
-            placeholder="selling reason"
+            placeholder="selling reason or phone issue"
           ></textarea>
         </div>
         <div>

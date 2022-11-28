@@ -26,11 +26,12 @@ const Product = () => {
 
   return (
     <div className="min-h-screen grid grid-cols-1 lg:grid-cols-3">
-      {products?.map((product) => (
+      {products?.map((product, i) => (
         <ProductCard
           key={product._id}
           refreash={refetch}
           product={product}
+          modalnumber={i + 1}
         ></ProductCard>
       ))}
     </div>
