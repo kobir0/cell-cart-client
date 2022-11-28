@@ -3,7 +3,8 @@ import React from "react";
 import ProductCard from "../../ProductPage/Product.jsx/ProductCard";
 
 const AdvertiseProduct = () => {
-  const url = `https://cell-cart-server.onrender.com/advertised`;
+  const url = `http://localhost:5000/advertised`;
+
   const { data: products = [], refetch } = useQuery({
     queryKey: ["advertised"],
     queryFn: async () => {

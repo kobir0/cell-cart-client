@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import Loading from "../../SharedCompo/Loading/Loading";
 
 const ReportedProduct = () => {
-  const url = `https://cell-cart-server.onrender.com/reported`;
+  const url = `http://localhost:5000/reported`;
   const {
     data: products = [],
     isLoading,
@@ -28,7 +28,7 @@ const ReportedProduct = () => {
     );
 
     if (confirm) {
-      fetch(`https://cell-cart-server.onrender.com/products/${id}`, {
+      fetch(`http://localhost:5000/products/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

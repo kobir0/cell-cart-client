@@ -2,12 +2,15 @@ import React, { useContext, useState } from "react";
 import toast from "react-hot-toast";
 import { NavLink } from "react-router-dom";
 import { AuthContext } from "../SharedCompo/Context/UserContext";
+import useToken from "../SharedCompo/Hooks/useToken";
 
 const Register = () => {
   const [Error, setError] = useState("");
   const { createUser, updateProfileInfo, logOut } = useContext(AuthContext);
   //   const [loading, setLoading] = useState(false);
   //   const navigate = useNavigate();
+  const [userEmail, setUserEmail] = useState();
+  const token = useToken(userEmail);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -64,9 +67,10 @@ const Register = () => {
 
   const userToDb = (name, email, img, role) => {
     const user = { name, email, role, varified: false, img };
+
     console.log(user);
 
-    fetch("https://cell-cart-server.onrender.com/users", {
+    fetch("http://localhost:5000/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -77,6 +81,7 @@ const Register = () => {
       .then((data) => {
         if (data.status) {
           toast.success("added database");
+          setUserEmail(data.email);
         }
         console.log(data);
       })
@@ -87,7 +92,7 @@ const Register = () => {
 
   return (
     <div>
-      <div className="hero min-h-screen bg-base-200">
+      <div className="hero min-h-screen ">
         <div className="hero-content w-80 lg:w-96 flex-col ">
           <div className="text-center lg:text-left">
             <h1 className="text-5xl font-bold">Please Register Here!!</h1>

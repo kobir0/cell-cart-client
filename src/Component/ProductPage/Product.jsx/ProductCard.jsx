@@ -24,7 +24,7 @@ const ProductCard = ({ product, refreash, modalnumber }) => {
     sellingReason,
   } = product;
 
-  const url = `https://cell-cart-server.onrender.com/users/${email}`;
+  const url = `http://localhost:5000/users/${email}`;
   const { data: user = [] } = useQuery({
     queryKey: ["users", email],
     queryFn: async () => {
@@ -38,7 +38,7 @@ const ProductCard = ({ product, refreash, modalnumber }) => {
     console.log(id);
     const report = { reported: true };
 
-    fetch(`https://cell-cart-server.onrender.com/products/${id}`, {
+    fetch(`http://localhost:5000/products/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(report),
@@ -56,10 +56,10 @@ const ProductCard = ({ product, refreash, modalnumber }) => {
   };
 
   return (
-    <div className="m-5 ">
-      <div className="hero shadow-xl rounded-lg  bg-slate-200">
+    <div className="m-5   ">
+      <div className="hero w-full shadow-xl rounded-lg  bg-slate-200">
         <div className=" ">
-          <img className="max-w-full" src={image} alt="" />
+          <img className="min-w-full rounded-t-lg h-64" src={image} alt="" />
           <div className="m-3">
             <div className="flex justify-between">
               <div className="flex">

@@ -7,7 +7,7 @@ import Loading from "../../SharedCompo/Loading/Loading";
 const MyProduct = () => {
   const { user } = useContext(AuthContext);
 
-  const url = `https://cell-cart-server.onrender.com/products?email=${user?.email}`;
+  const url = `http://localhost:5000/products?email=${user?.email}`;
   const {
     data: products = [],
     isLoading,
@@ -27,7 +27,7 @@ const MyProduct = () => {
     );
 
     if (confirm) {
-      fetch(`https://cell-cart-server.onrender.com/products/${id}`, {
+      fetch(`http://localhost:5000/products/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -48,7 +48,7 @@ const MyProduct = () => {
   const handleAdvertise = (id, product) => {
     const advetise = { advertiseItem: true };
 
-    fetch(`https://cell-cart-server.onrender.com/products/${id}`, {
+    fetch(`http://localhost:5000/products/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(advetise),

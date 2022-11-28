@@ -52,7 +52,7 @@ const AddProduct = () => {
       userVerified: false,
     };
 
-    fetch("https://cell-cart-server.onrender.com/products", {
+    fetch("http://localhost:5000/products", {
       method: "POST",
       headers: {
         "content-type": "application/json",

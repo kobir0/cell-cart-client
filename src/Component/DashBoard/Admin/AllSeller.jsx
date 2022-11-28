@@ -1,11 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import React from "react";
+import React, { useContext } from "react";
 import toast from "react-hot-toast";
+import { AuthContext } from "../../SharedCompo/Context/UserContext";
 
 import Loading from "../../SharedCompo/Loading/Loading";
 
 const AllSeller = () => {
-  const url = `https://cell-cart-server.onrender.com/users?name=Seller`;
+  const { user } = useContext(AuthContext);
+  const token = localStorage?.getItem("accessToken");
+  const url = `http://localhost:5000/users?name=Buyer&&email=${user?.email}`;
   const {
     data: users = [],
     isLoading,
@@ -13,7 +16,9 @@ const AllSeller = () => {
   } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
-      const res = await fetch(url);
+      const res = await fetch(url, {
+        headers: { author: token },
+      });
       const data = await res.json();
       return data.users;
     },
@@ -28,7 +33,7 @@ const AllSeller = () => {
     );
 
     if (confirm) {
-      fetch(`https://cell-cart-server.onrender.com/users/${id}`, {
+      fetch(`http://localhost:5000/users/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -49,7 +54,7 @@ const AllSeller = () => {
   const handleVerify = (id) => {
     const data = { varified: true };
 
-    fetch(`https://cell-cart-server.onrender.com/users/${id}`, {
+    fetch(`http://localhost:5000/users/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(data),
