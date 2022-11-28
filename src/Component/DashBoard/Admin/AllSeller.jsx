@@ -8,7 +8,7 @@ import Loading from "../../SharedCompo/Loading/Loading";
 const AllSeller = () => {
   const { user } = useContext(AuthContext);
   const token = localStorage?.getItem("accessToken");
-  const url = `http://localhost:5000/users?name=Buyer&&email=${user?.email}`;
+  const url = `http://localhost:5000/users?name=Seller&&email=${user?.email}`;
   const {
     data: users = [],
     isLoading,
