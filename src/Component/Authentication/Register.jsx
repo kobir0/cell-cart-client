@@ -80,7 +80,6 @@ const Register = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status) {
-          toast.success("added database");
           setUserEmail(data.email);
         }
         console.log(data);
