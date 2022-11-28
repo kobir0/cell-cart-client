@@ -8,7 +8,7 @@ import Loading from "../../SharedCompo/Loading/Loading";
 const MyOrders = () => {
   const { user } = useContext(AuthContext);
   const token = localStorage?.getItem("accessToken");
-  const url = `http://localhost:5000/orders?email=${user?.email}`;
+  const url = `https://cell-cart-server.onrender.com/orders?email=${user?.email}`;
   const {
     data: orders = [],
     isLoading,

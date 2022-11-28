@@ -93,7 +93,9 @@ const Routes = createBrowserRouter([
           {
             path: "/dashboard/payment/:id",
             loader: ({ params }) =>
-              fetch(`http://localhost:5000/orders/${params?.id}`),
+              fetch(
+                `https://cell-cart-server.onrender.com/orders/${params?.id}`
+              ),
             element: (
               <BuyerRoute>
                 <Payment></Payment>

@@ -66,7 +66,7 @@ const Login = () => {
     const user = { name, email, role, varified: false, img };
     setUserEmail(email);
 
-    fetch("http://localhost:5000/users", {
+    fetch("https://cell-cart-server.onrender.com/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",
