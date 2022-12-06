@@ -14,7 +14,7 @@ const AllSeller = () => {
     isLoading,
     refetch,
   } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["user"],
     queryFn: async () => {
       const res = await fetch(url, {
         headers: { author: token },
