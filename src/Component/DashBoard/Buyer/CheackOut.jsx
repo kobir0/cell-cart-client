@@ -13,7 +13,7 @@ const CheackOut = ({ booking }) => {
   const [transactionId, setTransactionId] = useState("");
 
   useEffect(() => {
-    fetch("https://cell-cart-server.onrender.com/create-payment-intent", {
+    fetch("https://cell-cart-4.onrender.com/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ price }),
@@ -69,7 +69,7 @@ const CheackOut = ({ booking }) => {
 
       const advetise = { status: "Sold" };
 
-      fetch(`https://cell-cart-server.onrender.com/products/${productId}`, {
+      fetch(`https://cell-cart-4.onrender.com/products/${productId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(advetise),
@@ -83,7 +83,7 @@ const CheackOut = ({ booking }) => {
           toast.error(err.message);
         });
 
-      fetch(`https://cell-cart-server.onrender.com/orders/${_id}`, {
+      fetch(`https://cell-cart-4.onrender.com/orders/${_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ transactionId: paymentIntent?.id }),

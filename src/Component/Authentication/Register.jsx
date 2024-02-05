@@ -70,7 +70,7 @@ const Register = () => {
 
     console.log(user);
 
-    fetch("https://cell-cart-server.onrender.com/users", {
+    fetch("https://cell-cart-4.onrender.com/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

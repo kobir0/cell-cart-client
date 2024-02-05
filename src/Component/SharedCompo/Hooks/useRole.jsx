@@ -5,7 +5,7 @@ const useRole = (email) => {
   const [userRole, setUserRole] = useState([]);
   useEffect(() => {
     if (email) {
-      fetch(`https://cell-cart-server.onrender.com/users/${email}`)
+      fetch(`https://cell-cart-4.onrender.com/users/${email}`)
         .then((res) => res.json())
         .then((data) => {
           setUserRole(data.user);

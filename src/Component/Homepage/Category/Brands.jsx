@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 const Brands = () => {
   const [brands, setBrands] = useState([]);
   useEffect(() => {
-    axios.get("https://cell-cart-server.onrender.com/brands").then((data) => {
+    axios.get("https://cell-cart-4.onrender.com/brands").then((data) => {
       setBrands(data.data.brands);
     });
   }, []);

@@ -8,7 +8,7 @@ import Loading from "../../SharedCompo/Loading/Loading";
 const AllBuyers = () => {
   const { user } = useContext(AuthContext);
   const token = localStorage?.getItem("accessToken");
-  const url = `https://cell-cart-server.onrender.com/users?name=Buyer&&email=${user?.email}`;
+  const url = `https://cell-cart-4.onrender.com/users?name=Buyer&&email=${user?.email}`;
   const {
     data: users = [],
     isLoading,
@@ -30,7 +30,7 @@ const AllBuyers = () => {
     );
 
     if (confirm) {
-      fetch(`https://cell-cart-server.onrender.com/users/${id}`, {
+      fetch(`https://cell-cart-4.onrender.com/users/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())

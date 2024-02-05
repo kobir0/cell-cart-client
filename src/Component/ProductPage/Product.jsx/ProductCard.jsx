@@ -24,7 +24,7 @@ const ProductCard = ({ product, refreash, modalnumber }) => {
     sellingReason,
   } = product;
 
-  const url = `https://cell-cart-server.onrender.com/users/${email}`;
+  const url = `https://cell-cart-4.onrender.com/users/${email}`;
   const { data: user = [] } = useQuery({
     queryKey: ["users", email],
     queryFn: async () => {
@@ -38,7 +38,7 @@ const ProductCard = ({ product, refreash, modalnumber }) => {
     console.log(id);
     const report = { reported: true };
 
-    fetch(`https://cell-cart-server.onrender.com/products/${id}`, {
+    fetch(`https://cell-cart-4.onrender.com/products/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(report),

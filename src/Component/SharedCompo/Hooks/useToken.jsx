@@ -7,7 +7,7 @@ const useToken = (email) => {
   useEffect(() => {
     if (email) {
       console.log(email);
-      fetch(`https://cell-cart-server.onrender.com/jwt?email=${email}`)
+      fetch(`https://cell-cart-4.onrender.com/jwt?email=${email}`)
         .then((response) => response.json())
         .then((data) => {
           if (data.accessToken) {
