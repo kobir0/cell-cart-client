@@ -33,7 +33,7 @@ const Modal = ({ product, modalId }) => {
     };
     console.log(order);
 
-    fetch("http://localhost:5001/orders", {
+    fetch("https://cell-cart-server-new.onrender.com/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",

@@ -70,7 +70,7 @@ const Register = () => {
 
     console.log(user);
 
-    fetch("http://localhost:5001/users", {
+    fetch("https://cell-cart-server-new.onrender.com/users", {
       method: "POST",
       headers: {
         "content-type": "application/json",

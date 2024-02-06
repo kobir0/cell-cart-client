@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import Loading from "../../SharedCompo/Loading/Loading";
 
 const ReportedProduct = () => {
-  const url = `http://localhost:5001/reported`;
+  const url = `https://cell-cart-server-new.onrender.com/reported`;
   const {
     data: products = [],
     isLoading,
@@ -28,7 +28,7 @@ const ReportedProduct = () => {
     );
 
     if (confirm) {
-      fetch(`http://localhost:5001/products/${id}`, {
+      fetch(`https://cell-cart-server-new.onrender.com/products/${id}`, {
         method: "DELETE",
       })
         .then((res) => res.json())
@@ -68,7 +68,7 @@ const ReportedProduct = () => {
             <div className="card-actions justify-end">
               <button
                 onClick={() => handleDelete(product._id, product)}
-                className="btn text-slate-100 btn-sm btn-outline"
+                className="btn text-slate-50 btn-sm btn-outline"
               >
                 Delete
               </button>

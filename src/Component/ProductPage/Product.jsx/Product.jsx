@@ -6,7 +6,7 @@ import ProductCard from "./ProductCard";
 
 const Product = () => {
   let { id } = useParams();
-  const url = `http://localhost:5001/products/${id}`;
+  const url = `https://cell-cart-server-new.onrender.com/products/${id}`;
   const {
     data: products = [],
     isLoading,

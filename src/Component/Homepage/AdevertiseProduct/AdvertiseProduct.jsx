@@ -3,7 +3,7 @@ import React from "react";
 import ProductCard from "../../ProductPage/Product.jsx/ProductCard";
 
 const AdvertiseProduct = () => {
-  const url = `http://localhost:5001/advertised`;
+  const url = `https://cell-cart-server-new.onrender.com/advertised`;
 
   const { data: products = [], refetch } = useQuery({
     queryKey: ["advertised"],

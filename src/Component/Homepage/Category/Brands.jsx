@@ -6,10 +6,12 @@ const Brands = () => {
   const [brands, setBrands] = useState([]);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
-    axios.get("http://localhost:5001/brands").then((data) => {
-      setBrands(data?.data?.brands);
-      setLoading(false);
-    });
+    axios
+      .get("https://cell-cart-server-new.onrender.com/brands")
+      .then((data) => {
+        setBrands(data?.data?.brands);
+        setLoading(false);
+      });
   }, []);
   // if (brands.length) {
   //   setLoading(false);
